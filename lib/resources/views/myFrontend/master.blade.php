@@ -8,7 +8,7 @@
 	<title>@yield('title') - Home</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	@yield('css')
-	<link rel="stylesheet" href="css/home5.css">
+	<link rel="stylesheet" href="css/homes.css">
 	<script type="text/javascript" src="js/myJS.js"></script>
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
