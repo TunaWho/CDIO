@@ -19,7 +19,7 @@ class AdminController extends Controller
     }
     public function getHome()
     {
-        $data = ['count_prod' => product::count(),'count_cate' => category::count(),'count_comm' => comment::count()];
+        $data = ['count_prod' => product::count(),'count_cate' => category::count(),'count_comm' => comment::count(),'count_user' => users::where('level',0)->count()];
         return view('myBackend.index', $data);
     }
     public function postLogin(Request $request)

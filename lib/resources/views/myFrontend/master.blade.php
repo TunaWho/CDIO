@@ -8,8 +8,9 @@
 	<title>@yield('title') - Home</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	@yield('css')
-	<link rel="stylesheet" href="css/homes.css">
-	<script type="text/javascript" src="js/myJS.js"></script>
+	<link rel="stylesheet" href="css/homee.css">
+	<link rel="stylesheet" href="css/mycss.css">
+	<script type="text/javascript" src="js/myJSs.js"></script>
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -40,10 +41,10 @@
 					</div>
 				</div>
 				<div id="cart" class="col-md-4 col-sm-12 col-xs-12">
-					@if (Auth::check())
-					<span class="display" id="btn">{{Auth::user()->name}}</span>
+					@if (Auth::check() && (Auth::user()->level == 0))
+					<span class="display name" id="btn">{{Auth::user()->name}}</span>
 					@else
-					<a class="display" href="{{route('login')}}">Đăng nhập</a>
+					<span class="display log-in" id="login">Đăng nhập</span>
 					@endif
 					<a class="display" href="{{route('cart_show')}}">Giỏ hàng</a>
 					<a href="{{route('cart_show')}}" style="width: 36px">{{Cart::getTotalQuantity()}}</a>	
@@ -51,7 +52,70 @@
 						<a href="{{route('logout')}}" onclick="return confirm('Would you like to log out?')"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
 					</div>			    
 				</div>
-			</div>			
+			</div>
+			<div class="sign-in">
+				<div class="form">
+					<div class="content">
+						<form method="POST">
+							<fieldset>
+								<legend>Login</legend>
+								<div class="form-group">
+									<input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" value="{{old('email')}}">
+									<p class="text-danger"></p>
+								</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="Password" name="password" type="password" value="">
+								<p class="text-danger"></p>
+								</div>
+							<div class="checkbox">
+								<div class="col-xs-4">
+								<label>
+									<input name="remember" type="checkbox" value="Remember Me" class="rmb">Remember me
+								</label>
+								</div>
+							</div>
+							<button type="submit"class="btn btn-primary">Đăng nhập</button>
+							<button type="button"class="btn btn-primary">Register</button>
+							</fieldset>
+						</form>
+						<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+					</div>
+				</div>
+			</div>
+			<div class="sign-in">
+				<div class="form_rgt">
+					<div class="content">
+						<form method="POST">
+							@csrf
+							<fieldset>
+								@include('error.note')
+								<legend>Register</legend>
+							<div class="form-group">
+								<label>Username</label>
+								<input type="text" name="fullname" class="form-control" placeholder="Fullname" required />
+							</div>
+							<div class="form-group">
+								<label>Email</label>
+								<input type="text" name="mail" class="form-control" placeholder="Email" required />
+							</div>
+							<div class="form-group">
+								<label>Mật khẩu</label>
+								<input type="password" name="pass" class="form-control" placeholder="Password" required />
+							</div>
+							<div class="form-group">
+								<label>Nhập lại mật khẩu</label>
+								<input type="password" name="re_pass" class="form-control" placeholder="Password" required />
+							</div>
+							<div class="form-group">
+								<p class="small tp">Đăng ký đồng nghĩa với bạn đã đống ý Điều Khoản dịch vụ & Và Chính Sách Bảo Mật Của Chúng Tôi</p>
+							</div>
+							<input type="submit" name="submit" value="Đăng ký" class="btn btn-primary" />
+						</fieldset>
+						</form>
+						<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</header><!-- /header -->
 	<!-- endheader -->
@@ -231,6 +295,6 @@
 		</div>
 	</footer>
 	<!-- endfooter -->
-
+	<div class="blackground"></div>
 </body>
 </html>

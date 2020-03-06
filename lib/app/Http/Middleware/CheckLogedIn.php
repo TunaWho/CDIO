@@ -16,7 +16,6 @@ class CheckLogedIn
     public function handle($request, Closure $next)
     {
         if(Auth::check() && (Auth::user()->level == 1) ){return redirect()->route('admin');}
-        else if(Auth::check() && (Auth::user()->level == 0)){return redirect()->route('home'); }
         return $next($request);
     }
 }

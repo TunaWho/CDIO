@@ -67,7 +67,7 @@ body{
 	font-weight: bold;
 	position: relative;
 }
-#cart span{
+#cart span.name{
 	color: #3ae4ff;
 	margin-right: 20px;
 	cursor: pointer;
@@ -77,9 +77,10 @@ body{
 #cart span:hover{
 	text-decoration: underline;
 }
-#cart a:first-child{
+#cart span.log-in{
 	color: #fff;
 	margin-right: 20px;
+	cursor: pointer;
 }	
 #cart a:nth-child(2){
 	color: #fff;
