@@ -9,8 +9,8 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	@yield('css')
 	<link rel="stylesheet" href="css/homee.css">
-	<link rel="stylesheet" href="css/mycss.css">
-	<script type="text/javascript" src="js/myJSs.js"></script>
+	<link rel="stylesheet" href="css/myxcss.css">
+	<script type="text/javascript" src="js/myJs1.js"></script>
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -49,15 +49,18 @@
 					<a class="display" href="{{route('cart_show')}}">Giỏ hàng</a>
 					<a href="{{route('cart_show')}}" style="width: 36px">{{Cart::getTotalQuantity()}}</a>	
 					<div class="logout">
-						<a href="{{route('logout')}}" onclick="return confirm('Would you like to log out?')"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+						<a href="{{route('FE_logout')}}" onclick="return confirm('Would you like to log out?')"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
 					</div>			    
 				</div>
 			</div>
 			<div class="sign-in">
 				<div class="form">
 					<div class="content">
-						<form method="POST">
+						<form name="valid" action="{{route('FE_login')}}" method="POST" onsubmit="return validate()" enctype="multipart/form-data">
+							@csrf
 							<fieldset>
+								@include('error.noteLogin')
+								@include('error.note')
 								<legend>Login</legend>
 								<div class="form-group">
 									<input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" value="{{old('email')}}">
@@ -74,8 +77,8 @@
 								</label>
 								</div>
 							</div>
-							<button type="submit"class="btn btn-primary">Đăng nhập</button>
-							<button type="button"class="btn btn-primary">Register</button>
+							<button type="submit"class="btn btn-primary xs">Đăng nhập</button>
+							<button type="button"class="btn btn-primary" id="rgt">Register</button>
 							</fieldset>
 						</form>
 						<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
@@ -85,7 +88,7 @@
 			<div class="sign-in">
 				<div class="form_rgt">
 					<div class="content">
-						<form method="POST">
+						<form action="{{route('rgt')}}" method="POST">
 							@csrf
 							<fieldset>
 								@include('error.note')
@@ -109,7 +112,11 @@
 							<div class="form-group">
 								<p class="small tp">Đăng ký đồng nghĩa với bạn đã đống ý Điều Khoản dịch vụ & Và Chính Sách Bảo Mật Của Chúng Tôi</p>
 							</div>
-							<input type="submit" name="submit" value="Đăng ký" class="btn btn-primary" />
+							<div class="form-group">
+								<input type="submit" name="submit" value="Đăng ký" class="btn btn-primary" />
+								<button type="button" name="btn" class="btn btn-primary right">Back</button>
+							</div>
+							
 						</fieldset>
 						</form>
 						<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
@@ -199,10 +206,10 @@
 					<div id="banner-t" class="text-center">
 						<div class="row">
 							<div class="banner-t-item col-md-6 col-sm-12 col-xs-12">
-								<a href="#"><img src="img/home/banner-t-1.png" alt="" class="img-thumbnail"></a>
+								<a href="{{route('home')}}"><img src="img/home/banner-t-1.png" alt="" class="img-thumbnail"></a>
 							</div>
 							<div class="banner-t-item col-md-6 col-sm-12 col-xs-12">
-								<a href="#"><img src="img/home/banner-t-1.png" alt="" class="img-thumbnail"></a>
+								<a href="{{route('home')}}"><img src="img/home/banner-t-1.png" alt="" class="img-thumbnail"></a>
 							</div>
 						</div>					
                     </div>
@@ -247,11 +254,29 @@
 				{id:id,qty:quantity},
 				function(){
 					location.reload();
-				}	
-			);
-	}
-});
+				});
+			}
 
+		});
+function validate(){
+		const mail = document.forms['valid']['email'].value;
+		const password = document.forms['valid']['password'].value;
+		const alert = document.querySelectorAll('p');
+			if(mail == ""){
+				alert[0].innerHTML = 'You have to enter E-mail';
+				alert[1].innerHTML = '';
+			}
+			else if(password == ""){
+				alert[0].innerHTML = '';
+				alert[1].innerHTML = 'Password can\'t be empty';
+
+			}
+			else {return true;}
+			return false;
+		}
+		const btn = document.getElementById("btn");
+        const logout = document.querySelector(".logout");
+		btn.addEventListener('click',function(){logout.classList.toggle("show");});
 	</script>
 	<!-- footer -->
 	<footer id="footer">			

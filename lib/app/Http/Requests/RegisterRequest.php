@@ -24,11 +24,9 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullname' => 'unique:vp_users,name',
-            'mail' => 'unique:vp_users,email',
-            'mail' => 'required|email',
+            'fullname' => 'required|max:14|unique:vp_users,name',
+            'mail' => 'required|email|unique:vp_users,email',
             'pass' => 'required|min:6|max:20',
-            'fullname' => 'required|max:14',
             're_pass' => 'required|same:pass'
         ];
     }

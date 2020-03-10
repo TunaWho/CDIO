@@ -18,7 +18,7 @@
 			<a class="navbar-brand" href="{{route('admin')}}">Haipro Admin</a>
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{Auth::user()->name}} <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> @if (Auth::user()->level == 1){{Auth::user()->name}}@endif <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 						<li><a href="{{route('logout')}}" onclick="return confirm('Would you like to log out?')"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>Logout</a></li>
 						</ul>

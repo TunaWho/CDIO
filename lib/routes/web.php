@@ -14,7 +14,10 @@
 use App\Http\Controllers\Admin\AdminController;
 
 
-Route::get('/', 'FrontendController@getHome')->name('home');
+Route::get('home', 'FrontendController@getHome')->name('home');
+Route::post('home', 'FrontendController@postFELogin')->name('FE_login');
+Route::post('/', 'FrontendController@postRegister')->name('rgt');
+Route::get('/', 'FrontendController@getFELogout')->name('FE_logout');
 Route::get('detail/{id}/{slug}.html','FrontendController@getDetail')->name('detail');
 Route::post('detail/{id}/{slug}.html','FrontendController@postComment')->name('comm');
 Route::get('category/{id}/{slug}.html','FrontendController@getCategory')->name('category');
@@ -33,10 +36,6 @@ Route::group(['namespace' => 'Admin'], function () {
     Route::group(['prefix' => 'login','middleware'=>'CheckLogedIn'], function () {
         Route::get('/', 'AdminController@getLogin')->name('login');
         Route::post('/', 'AdminController@postLogin')->name('login');
-    });
-    Route::group(['prefix' => 'register'], function () {
-        Route::get('', 'AdminController@getRegister')->name('rgt');
-        Route::post('', 'AdminController@postRegister')->name('rgt');
     });
     
     Route::get('logout', 'AdminController@getLogout')->name('logout');
