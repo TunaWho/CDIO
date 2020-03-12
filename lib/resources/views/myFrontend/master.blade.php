@@ -2,6 +2,7 @@
 <html>
 <head>
 <base href="{{asset('public/layout/frontend')}}/">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,10 +11,11 @@
 	@yield('css')
 	<link rel="stylesheet" href="css/homee.css">
 	<link rel="stylesheet" href="css/myxcss.css">
-	<script type="text/javascript" src="js/myJs1.js"></script>
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/myJs1.js"></script>
+	<script type="text/javascript" src="js/myAjax.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>    
@@ -56,11 +58,10 @@
 			<div class="sign-in">
 				<div class="form">
 					<div class="content">
-						<form name="valid" action="{{route('FE_login')}}" method="POST" onsubmit="return validate()" enctype="multipart/form-data">
+						<form name="valid" id="form" onclick="return validate()" enctype="multipart/form-data">
 							@csrf
 							<fieldset>
-								@include('error.noteLogin')
-								@include('error.note')
+								<div class="alert alert-danger" style="display: none"></div>
 								<legend>Login</legend>
 								<div class="form-group">
 									<input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" value="{{old('email')}}">
@@ -77,7 +78,7 @@
 								</label>
 								</div>
 							</div>
-							<button type="submit"class="btn btn-primary xs">Đăng nhập</button>
+							<button type="button"class="btn btn-primary xs">Đăng nhập</button>
 							<button type="button"class="btn btn-primary" id="rgt">Register</button>
 							</fieldset>
 						</form>
@@ -240,24 +241,6 @@
 				menu.removeAttr('style');
 			}
 		});
-		$( document ).ready(function() {
-			updateOn = function(id,qty){
-			let quantity = qty;
-				$(document).off('click', '#plus').on('click', '#plus',function() {
-					quantity = 1
-					}); 
-				$(document).off('click', '#minus').on('click', '#minus',function() {
-					quantity = -1
-					}); 
-			$.get(
-				'{{asset('index.php/cart/update')}}',
-				{id:id,qty:quantity},
-				function(){
-					location.reload();
-				});
-			}
-
-		});
 function validate(){
 		const mail = document.forms['valid']['email'].value;
 		const password = document.forms['valid']['password'].value;
@@ -269,9 +252,12 @@ function validate(){
 			else if(password == ""){
 				alert[0].innerHTML = '';
 				alert[1].innerHTML = 'Password can\'t be empty';
-
+				
 			}
-			else {return true;}
+			else {
+				alert[0].innerHTML = '';
+				alert[1].innerHTML = '';
+				return true;}
 			return false;
 		}
 		const btn = document.getElementById("btn");

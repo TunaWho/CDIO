@@ -67,9 +67,10 @@ class FrontendController extends Controller
             'level' => 0,
         ];
         if (Auth::attempt($data, $request->has('remember'))) {
-            return back();
+            return response()->json(['success' => true]);
         } else {
-            return redirect()->back()->withInput()->with('error', 'Tài khoản hoặc mật khẩu chưa đúng');
+            $output["error"] = "Tài khoản hoặc mật khẩu chưa đúng";
+            return json_encode($output);
         }
     }
     public function getFELogin()
