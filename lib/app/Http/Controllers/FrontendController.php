@@ -11,6 +11,7 @@ use App\Http\Requests\RegisterRequest;
 use Auth;
 use Illuminate\Http\Request;
 
+
 class FrontendController extends Controller
 {
     public function getHome()
@@ -57,7 +58,8 @@ class FrontendController extends Controller
         $user->password = bcrypt($request->pass);
         $user->level = 0;
         $user->save();
-        return back();
+        $output["success"] = "Đăng ký thành công";
+        return json_encode($output);
     }
     public function postFELogin(Request $request)
     {

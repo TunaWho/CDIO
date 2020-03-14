@@ -15,7 +15,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/myJs1.js"></script>
-	<script type="text/javascript" src="js/myAjax.js"></script>
+	<script type="text/javascript" src="js/myAjax_1.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>    
@@ -58,7 +58,7 @@
 			<div class="sign-in">
 				<div class="form">
 					<div class="content">
-						<form name="valid" id="form" onclick="return validate()" enctype="multipart/form-data">
+						<form name="valid" id="form" enctype="multipart/form-data">
 							@csrf
 							<fieldset>
 								<div class="alert alert-danger" style="display: none"></div>
@@ -89,10 +89,11 @@
 			<div class="sign-in">
 				<div class="form_rgt">
 					<div class="content">
-						<form action="{{route('rgt')}}" method="POST">
+						<form id="rgt_form">
 							@csrf
 							<fieldset>
-								@include('error.note')
+								<div class="alert alert-danger reg" style="display: none"></div>
+								<div class="alert alert-success" style="display: none"></div>
 								<legend>Register</legend>
 							<div class="form-group">
 								<label>Username</label>
@@ -114,7 +115,7 @@
 								<p class="small tp">Đăng ký đồng nghĩa với bạn đã đống ý Điều Khoản dịch vụ & Và Chính Sách Bảo Mật Của Chúng Tôi</p>
 							</div>
 							<div class="form-group">
-								<input type="submit" name="submit" value="Đăng ký" class="btn btn-primary" />
+								<input type="button" name="submit" value="Đăng ký" class="btn btn-primary rgt" />
 								<button type="button" name="btn" class="btn btn-primary right">Back</button>
 							</div>
 							
@@ -241,25 +242,6 @@
 				menu.removeAttr('style');
 			}
 		});
-function validate(){
-		const mail = document.forms['valid']['email'].value;
-		const password = document.forms['valid']['password'].value;
-		const alert = document.querySelectorAll('p');
-			if(mail == ""){
-				alert[0].innerHTML = 'You have to enter E-mail';
-				alert[1].innerHTML = '';
-			}
-			else if(password == ""){
-				alert[0].innerHTML = '';
-				alert[1].innerHTML = 'Password can\'t be empty';
-				
-			}
-			else {
-				alert[0].innerHTML = '';
-				alert[1].innerHTML = '';
-				return true;}
-			return false;
-		}
 		const btn = document.getElementById("btn");
         const logout = document.querySelector(".logout");
 		btn.addEventListener('click',function(){logout.classList.toggle("show");});

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
 class RegisterRequest extends FormRequest
 {
@@ -42,5 +44,9 @@ class RegisterRequest extends FormRequest
             'pass.min' => 'Mật khẩu chứa ít nhất 6 ký tự',
             're_pass.same' => 'Mật khẩu không giống nhau'
         ];
+    }
+    public function FailedValidation(Validator $validator)
+    {
+        throw (new ValidationException($validator))->status(200)->errorBag($this->errorBag)->redirectTo($this->getRedirectUrl());
     }
 }
