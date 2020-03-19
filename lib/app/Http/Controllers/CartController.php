@@ -33,7 +33,11 @@ class CartController extends Controller
     }
     public function getUpdateCart(Request $request)
     {
-        Cart::update($request->id, ['quantity'=> $request->qty]);
+        if(Cart::getTotalQuantity() < 10){
+            Cart::update($request->id, ['quantity'=> $request->qty]);
+        }else if($request->qty < 0){
+            Cart::update($request->id, ['quantity'=> $request->qty]);
+        }
     }
     public function postSendEmail(Request $request)
     {

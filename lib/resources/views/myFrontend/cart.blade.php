@@ -26,9 +26,9 @@
 								<td>
 									<div class="form-inline">
 									<div class="form-group">
-										<button onclick="updateOn({{$item->id}},-1);"  type="button" class="btn btn-light" id="minus" ><i class="fa fa-minus" aria-hidden="true" ></i></button>
-										<input id="{{$item->id}}" style="width: 39px; height: 36px" class="form-control" type="text" value="{{$item->quantity}}" name="qty" onchange="updateOn({{$item->id}},this.value)">
-										<button onclick="updateOn({{$item->id}},1);"  type="button" class="btn btn-light" id="plus"><i class="fa fa-plus" aria-hidden="true"></i></button>
+									<button type="button" class="btn btn-light" id="minus" name="{{$item->id}}"><i class="fa fa-minus" aria-hidden="true" ></i></button>
+										<input id="{{$item->id}}" style="width: 39px; height: 36px" class="form-control" type="text" value="{{$item->quantity}}" name="qty" onchange="updateOn({{$item->id}},this.value)" type="number" min="1" max="99" size="1" maxlength="2">
+									<button type="button" class="btn btn-light" id="plus" name="{{$item->id}}"><i class="fa fa-plus" aria-hidden="true"></i></button>
 									</div>
 								</div>
 								</td>

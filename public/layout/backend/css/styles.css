@@ -937,3 +937,6 @@ h1.page-header {
 #avatar{
     cursor: pointer;
 }
+.page{
+	text-align: center;
+}

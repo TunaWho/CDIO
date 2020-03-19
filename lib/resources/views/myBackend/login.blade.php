@@ -8,7 +8,7 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/datepicker3.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
 
 <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
@@ -45,7 +45,7 @@
 									<input name="remember" type="checkbox" value="Remember Me">Remember me
 								</label>
 								</div>
-								<div class="col-xs-4 col-xs-push-4"><a href="{{route('rgt')}}">Register Account</a></div>
+								<div class="col-xs-4 col-xs-push-4"><a href="{{route('ad_rgt')}}">Register Account</a></div>
 							</div>
 							<button type="submit"class="btn btn-primary">Đăng nhập</button>
 						</fieldset>

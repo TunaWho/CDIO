@@ -9,14 +9,9 @@ document.addEventListener(
         const rgt = document.getElementById("rgt");
         const form_rgt = document.querySelector(".form_rgt");
         const back = document.querySelector('.right');
-
+        const header = document.querySelector('#header');
+        let status = true;
         let nutClick = "";
-        login.onclick = () => {
-            form[0].classList.add("active");
-            form_login.classList.add("show2");
-            bg.classList.add("active");
-            nutClick = "login";
-        };
         rgt.onclick = () => {
             form[0].classList.remove("active");
             form_login.classList.remove("show2");
@@ -44,6 +39,22 @@ document.addEventListener(
                 bg.classList.remove("active");
             }
         }
+
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 1 && status === true) {
+                header.classList.add('scroll');
+                status = false;
+            } else if (window.pageYOffset < 1 && status === false) {
+                header.classList.remove('scroll');
+                status = true;
+            }
+        })
+        login.onclick = () => {
+            form[0].classList.add("active");
+            form_login.classList.add("show2");
+            bg.classList.add("active");
+            nutClick = "login";
+        };
     },
     false
 );

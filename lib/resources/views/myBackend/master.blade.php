@@ -7,9 +7,13 @@
 <title>@yield('title') | Haipro shop</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/datepicker3.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
 <script type="text/javascript" src="../../editor/ckeditor/ckeditor.js"></script>
 <script src="js/lumino.glyphs.js"></script>
+<style>
+    #tbl-first-row{
+        font-weight:bold;}	
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -34,6 +38,7 @@
 			<li class="active"><a href="{{route('admin')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Trang chủ</a></li>
 		<li><a href="{{Route('product')}}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Sản phẩm</a></li>
 			<li><a href="{{route('cate')}}"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Danh mục</a></li>
+			<li><a href="{{route('User')}}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> User</a></li>
 			<li role="presentation" class="divider"></li>
 		</ul>
 		

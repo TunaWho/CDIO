@@ -13,7 +13,8 @@ class ProductsController extends Controller
     public function getProduct()
     {
         $data['productList'] = DB::table('vp_sanpham')->join('vp_categories',
-        'vp_sanpham.prod_cate','=','vp_categories.cate_id')->orderBy('prod_id','desc')->get();
+        'vp_sanpham.prod_cate','=','vp_categories.cate_id')->get();
+        $data['productList'] = product::orderBy('prod_price','desc')->paginate(4);
         return view('myBackend.product',$data);
     }
     public function getAddProduct()

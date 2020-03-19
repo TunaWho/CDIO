@@ -1,16 +1,12 @@
 $(document).ready(function () {
     updateOn = function (id, qty) {
-        let quantity = qty;
-        $(document)
-            .off("click", "#plus")
-            .on("click", "#plus", function () {
-                quantity = 1;
-            });
-        $(document)
-            .off("click", "#minus")
-            .on("click", "#minus", function () {
-                quantity = -1;
-            });
+        var quantity;
+        if($("input[name='qty']").val() > 10){
+            quantity = 9;
+        }
+        else{
+            quantity = qty;
+        }
         $.get(
             "http://localhost/myproject1/cart/update",
             { id: id, qty: quantity },
@@ -19,6 +15,22 @@ $(document).ready(function () {
             }
         );
     };
+    $("#minus").click(function (e) { 
+        e.preventDefault();
+        $.get("http://localhost/myproject1/cart/update", {id: $('#minus').attr('name'), qty: -1},
+            function () {
+                location.reload();
+            },
+        );
+    });
+    $("#plus").click(function (e) { 
+        e.preventDefault();
+        $.get("http://localhost/myproject1/cart/update", {id: $('#plus').attr('name'), qty: 1},
+            function () {
+                location.reload();
+            },
+        );
+    });
     $(".xs").click(function (e) {
         e.preventDefault();
         $.ajax({
@@ -39,12 +51,12 @@ $(document).ready(function () {
                     if (validate()) {
                         //Chuyen response tra ve thanh chuoi JSON
                         let res = JSON.parse(JSON.stringify(response));
-                        $(".alert-danger").css("display", "block");
+                        $(".alert-danger.lg").css("display", "block");
                         if ($(".alert-danger p").length > 0) {
                             $(".alert-danger p").remove();
-                        } //Ngan chan alert loop
+                        } //xoa tat ca alert cu xong moi add
                         $.each(res, function (key, value) {
-                            $(".alert-danger").append("<p>" + value + "</p>");
+                            $(".alert-danger.lg").append("<p>" + value + "</p>");
                         });
                         $(".alert-danger").find('p').css("margin-bottom", ".7rem");
                     }
@@ -72,7 +84,7 @@ $(document).ready(function () {
                 if ($(".alert-danger p").length > 0 || $(".alert-success p").length > 0) {
                     $(".alert-danger p").remove();
                     $(".alert-success p").remove();
-                } //Ngan chan alert loop
+                } //xoa tat ca alert cu xong moi add
                 if (error.success === undefined) {
                     $(".alert-danger.reg").css("display", "block");
                     $(".alert-success").css("display", "none");

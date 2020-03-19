@@ -7,15 +7,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>@yield('title') - Home</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
 	@yield('css')
-	<link rel="stylesheet" href="css/homee.css">
-	<link rel="stylesheet" href="css/myxcss.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/home_1.css">
+	<link rel="stylesheet" href="css/myCss_1.css">
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/myJs1.js"></script>
-	<script type="text/javascript" src="js/myAjax_1.js"></script>
+	<script type="text/javascript" src="js/myJs_2.js"></script>
+	<script type="text/javascript" src="js/myAjax_c.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>    
@@ -51,7 +51,7 @@
 					<a class="display" href="{{route('cart_show')}}">Giỏ hàng</a>
 					<a href="{{route('cart_show')}}" style="width: 36px">{{Cart::getTotalQuantity()}}</a>	
 					<div class="logout">
-						<a href="{{route('FE_logout')}}" onclick="return confirm('Would you like to log out?')"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+						<a href="{{route('FE_logout')}}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
 					</div>			    
 				</div>
 			</div>
@@ -61,7 +61,7 @@
 						<form name="valid" id="form" enctype="multipart/form-data">
 							@csrf
 							<fieldset>
-								<div class="alert alert-danger" style="display: none"></div>
+								<div class="alert alert-danger lg" style="display: none"></div>
 								<legend>Login</legend>
 								<div class="form-group">
 									<input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" value="{{old('email')}}">

@@ -48,6 +48,9 @@
 								</table>							
 							</div>
 						</div>
+						<div class="page">
+							{{$productList->links()}}
+						</div>
 						<div class="clearfix"></div>
 					</div>
 				</div>

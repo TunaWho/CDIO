@@ -1,7 +1,7 @@
 @extends('myFrontend.master')
 @section('title','Products Category')
 @section('css')
-<link rel="stylesheet" href="css/category2.css">
+<link rel="stylesheet" href="css/category_1.css">
 @endsection
 @section('main')
 <div id="wrap-inner">
@@ -25,6 +25,5 @@
 	<div id="pagination">
 		{{$products->links()}}
 	</div>
-</div>
 @endsection
 

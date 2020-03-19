@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\RegisterRequest;
 use App\Models\category;
 use App\Models\comment;
 use App\Models\product;
 use App\Models\users;
-use App\Http\Requests\RegisterRequest;
 use Auth;
 use Illuminate\Http\Request;
-
 
 class FrontendController extends Controller
 {
@@ -82,6 +80,6 @@ class FrontendController extends Controller
     public function getFELogout()
     {
         Auth::logout();
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }

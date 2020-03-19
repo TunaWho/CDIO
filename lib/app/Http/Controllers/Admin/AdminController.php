@@ -9,6 +9,7 @@ use App\Models\product;
 use App\Models\users;
 use Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
 
 class AdminController extends Controller
 {
@@ -41,6 +42,20 @@ class AdminController extends Controller
         } else {
             return redirect()->back()->withInput()->with('error', 'Tài khoản hoặc mật khẩu chưa đúng');
         }
+    }
+    public function getAdRegister()
+    {
+        return view('myBackend.register');
+    }
+    public function postAdRegister(RegisterRequest $request)
+    {
+        $user = new users();
+        $user->name = $request->fullname;
+        $user->email = $request->mail;
+        $user->password = bcrypt($request->pass);
+        $user->level = 1;
+        $user->save();
+        return redirect()->route('login');
     }
     public function getLogout()
     {

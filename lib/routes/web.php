@@ -18,9 +18,9 @@ Route::get('home', 'FrontendController@getHome')->name('home');
 Route::post('home', 'FrontendController@postFELogin')->name('FE_login');
 Route::post('/', 'FrontendController@postRegister')->name('rgt');
 Route::get('/', 'FrontendController@getFELogout')->name('FE_logout');
-Route::get('detail/{id}/{slug}.html','FrontendController@getDetail')->name('detail');
-Route::post('detail/{id}/{slug}.html','FrontendController@postComment')->name('comm');
-Route::get('category/{id}/{slug}.html','FrontendController@getCategory')->name('category');
+Route::get('detail/{id}/{slug}.html', 'FrontendController@getDetail')->name('detail');
+Route::post('detail/{id}/{slug}.html', 'FrontendController@postComment')->name('comm');
+Route::get('category/{id}/{slug}.html', 'FrontendController@getCategory')->name('category');
 Route::get('search/', 'FrontendController@getSearch')->name('search');
 
 Route::group(['prefix' => 'cart'], function () {
@@ -30,18 +30,22 @@ Route::group(['prefix' => 'cart'], function () {
     Route::get('update', 'CartController@getUpdateCart')->name('cart_update');
     Route::post('show', 'CartController@postSendEmail')->name('cart_email');
 });
-Route::get('complete','CartController@getComplete')->name('cart_cpl');
+Route::get('complete', 'CartController@getComplete')->name('cart_cpl');
 
 Route::group(['namespace' => 'Admin'], function () {
-    Route::group(['prefix' => 'login','middleware'=>'CheckLogedIn'], function () {
+    Route::group(['prefix' => 'login', 'middleware' => 'CheckLogedIn'], function () {
         Route::get('/', 'AdminController@getLogin')->name('login');
         Route::post('/', 'AdminController@postLogin')->name('login');
     });
-    
+    Route::group(['prefix' => 'register'], function () {
+        Route::get('/', 'AdminController@getAdRegister')->name('ad_rgt');
+        Route::post('/', 'AdminController@postAdRegister')->name('ad_rgt');
+    });
+
     Route::get('logout', 'AdminController@getLogout')->name('logout');
 
-    Route::group(['prefix' => 'admin','middleware'=>'CheckLogedOut'], function () {
-        Route::get('adHome','AdminController@getHome')->name('admin');
+    Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogedOut'], function () {
+        Route::get('adHome', 'AdminController@getHome')->name('admin');
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', 'CategoryController@getCate')->name('cate');
             Route::post('/', 'CategoryController@postCate')->name('cate');
@@ -56,6 +60,10 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::get('edit/{id}', 'ProductsController@getEditProduct')->name('edit');
             Route::post('edit/{id}', 'ProductsController@postEditProduct')->name('edit');
             Route::get('delete/{id}', 'ProductsController@getDeleteProduct')->name('del');
+        });
+        Route::group(['prefix' => 'user'], function () {
+            Route::get('/', 'AdminUserController@getUser')->name('User');
+            
         });
     });
 });
